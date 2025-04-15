@@ -33,14 +33,8 @@ fibs = unfoldr (\(x, y) -> Just(x, (y, x + y))) (0, 1)
 -- [2,3,5,7,11,13,17,19,23,29]
 --
 primes :: [Integer]
-primes = primesCalc (unfoldr (\x -> Just(x, x + 1)) 2)
+primes = unfoldr sieve (unfoldr (\x -> Just(x, x + 1)) 2)
 
-
-primesCalc :: [Integer] -> [Integer]
-primesCalc arr = case sieve arr of
-    Nothing -> []
-    Just(x, xs) -> x : primesCalc xs 
-    
 -- | One step of Sieve of Eratosthenes
 -- (to be used with 'unfoldr')
 --
